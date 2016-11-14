@@ -1,0 +1,233 @@
+# This is a configuration file for ProGuard.
+# http://proguard.sourceforge.net/index.html#manual/usage.html
+
+
+-keepclassmembers class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator CREATOR;
+}
+
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+# The support library contains references to newer platform versions.
+# Don't warn about those in case this app is linking against an older
+# platform version.  We know about them, and they are safe.
+-dontwarn android.support.**
+
+# Understand the @Keep support annotation.
+-keep class android.support.annotation.Keep
+
+-keep @android.support.annotation.Keep class * {*;}
+
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep <methods>;
+}
+
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep <fields>;
+}
+
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep <init>(...);
+}
+
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-verbose
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+-dontoptimize 
+-dontpreverify
+-dontshrink 
+-ignorewarnings  
+-keepattributes Signature
+-keepattributes InnerClasses
+-keepattributes *Annotation*
+-keepattributes *JavascriptInterface* 
+-keepattributes Exceptions 
+-keep class * extends java.lang.annotation.Annotation { *; }
+-keep public class com.google.vending.licensing.ILicensingService
+-keep public class com.android.vending.licensing.ILicensingService
+
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-assumenosideeffects class android.util.Log {
+  public static boolean isLoggable(java.lang.String,int);
+  public static int v(...);
+  public static int i(...);
+  public static int w(...);
+  public static int d(...);
+  public static int e(...);
+}
+
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context);
+}
+-keepclasseswithmembers class * {                                               
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);     
+}
+
+-keepclasseswithmembers class * {
+    void onClick*(...);
+}
+-keepclasseswithmembers class * {
+    *** *Callback(...);
+}
+
+-keepclassmembers public class * extends android.view.View {
+   void set*(***);
+   *** get*();
+}
+
+-keepclassmembers class * extends android.app.Activity {
+   public void *(android.view.View);
+   private void * (android.view.View);
+   public boolean * (android.view.View);
+   private boolean * (android.view.View);
+   public void * (android.widget.AdapterView, android.view.View, int, long);
+   public boolean * (android.view.View, android.view.MotionEvent);
+   public void * (android.view.View, boolean);
+   private void * (android.view.View, boolean);
+   public void * (android.view.View, int);
+	private void * (android.view.View, int);
+}
+
+-keepclassmembers class * extends android.app.Fragment{
+	public void * (android.view.View);
+	private void * (android.view.View);
+	public boolean * (android.view.View);
+	private boolean * (android.view.View);
+	public void * (android.widget.AdapterView, android.view.View, int, long);
+	public boolean * (android.view.View, android.view.MotionEvent);
+	public void * (android.view.View, boolean);
+    private void * (android.view.View, boolean);
+    public void * (android.view.View, int);
+	private void * (android.view.View, int);
+}
+
+-keepclassmembers class * extends android.support.v4.app.Fragment{
+	public void * (android.view.View);
+	private void * (android.view.View);
+	public boolean * (android.view.View);
+	private boolean * (android.view.View);
+	public void * (android.widget.AdapterView, android.view.View, int, long);
+	public boolean * (android.view.View, android.view.MotionEvent);
+	public void * (android.view.View, boolean);
+   private void * (android.view.View, boolean);
+   public void * (android.view.View, int);
+	private void * (android.view.View, int);
+}
+
+-keepclassmembers class * extends android.app.Dialog{
+	public void * (android.view.View);
+	private void * (android.view.View);
+	public boolean * (android.view.View);
+	private boolean * (android.view.View);
+	public void * (android.widget.AdapterView, android.view.View, int, long);
+	public boolean * (android.view.View, android.view.MotionEvent);
+	public void * (android.view.View, boolean);
+    private void * (android.view.View, boolean);
+    public void * (android.view.View, int);
+	private void * (android.view.View, int);
+}
+
+-keepclassmembers class ** {
+    public void onEvent*(**);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep class * implements android.os.Parcelable {
+<fields>;
+  public static final android.os.Parcelable$Creator *;
+}
+
+-keep class * implements java.io.Serializable{
+	 <fields>;
+}
+
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;   
+    private static final java.io.ObjectStreamField[] serialPersistentFields;   
+    private void writeObject(java.io.ObjectOutputStream);   
+    private void readObject(java.io.ObjectInputStream);   
+    java.lang.Object writeReplace();   
+    java.lang.Object readResolve();   
+}
+
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+# The support library contains references to newer platform versions.
+# Don't warn about those in case this app is linking against an older
+# platform version.  We know about them, and they are safe.
+-dontwarn android.support.**
+
+-keep class android.** {*; }
+-keep public class * extends android.view
+-keep public class * extends android.app.Fragment  
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep public class * extends android.support.v4.**
+-keep public class com.android.vending.licensing.ILicensingService
+-keep class android.support.v4.**{*;}
+-keep interface android.support.v4.app.** { *; }
+-keep class * extends android.app.Dialog
+-keep class android.webkit.**
+-keep class android.view.**
+
+##---------------Begin: proguard configuration for Gson  ----------  
+# Gson uses generic type information stored in a class file when working with fields. Proguard  
+# removes such information by default, so configure it to keep all of it.  
+-keepattributes Signature  
+  
+# For using GSON annotation  
+-keepattributes *Annotation*  
+  
+# Gson specific classes  
+-keep class sun.misc.Unsafe { *; }  
+-keep class com.google.gson.stream.** { *; }  
+  
+# Application classes that will be serialized/deserialized over Gson  
+-keep class com.google.gson.examples.android.model.** { *; }  
+  
+##---------------End: proguard configuration for Gson  ----------  
+
+-keepattributes JavascriptInterface
+
+-keepattributes SourceFile,LineNumberTable
+
+
+## GSON 2.2.4 specific rules ##
+
+-keepattributes EnclosingMethod
+
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+
+#如果compileSdkVersion为23，请添加以下混淆代码
+-dontwarn org.apache.http.**
+-dontwarn android.webkit.**
+-keep class org.apache.http.** { *; }
+-keep class org.apache.commons.codec.** { *; }
+-keep class org.apache.commons.logging.** { *; }
+-keep class android.net.compatibility.** { *; }
+-keep class android.net.http.** { *; }
+#
